@@ -1,0 +1,39 @@
+name: connectcall
+description: "ConnectCall - A 1-to-1 Flutter audio/video calling app"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  # Firebase (backend + auth)
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+
+  # Real-time calling (WebRTC)
+  flutter_webrtc: ^0.11.7
+
+  # State management
+  provider: ^6.1.2
+
+  # Permissions
+  permission_handler: ^11.3.1
+
+  # Utilities
+  intl: ^0.19.0
+  uuid: ^4.4.2
+  cached_network_image: ^3.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

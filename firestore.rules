@@ -1,0 +1,33 @@
+rules_version = '2';
+
+// Baseline rules good enough for an assignment/demo build.
+// Tighten further (e.g. validate document shape) before any
+// production use.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Any signed-in user can read the directory (needed for the
+    // Contacts screen) but can only edit their own profile doc.
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // A call doc (and its ICE-candidate subcollections) is only
+    // readable/writable by its two participants.
+    match /calls/{callId} {
+      allow read, write: if request.auth != null &&
+        (request.auth.uid == resource.data.callerId ||
+         request.auth.uid == resource.data.calleeId);
+      allow create: if request.auth != null &&
+        request.auth.uid == request.resource.data.callerId;
+
+      match /callerCandidates/{docId} {
+        allow read, write: if request.auth != null;
+      }
+      match /calleeCandidates/{docId} {
+        allow read, write: if request.auth != null;
+      }
+    }
+  }
+}
