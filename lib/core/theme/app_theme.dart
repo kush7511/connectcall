@@ -39,8 +39,8 @@ class AppTheme {
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             minimumSize: const Size(double.infinity, 52),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             elevation: 0,
           ),
         ),
@@ -85,8 +85,8 @@ class AppTheme {
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             minimumSize: const Size(double.infinity, 52),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             elevation: 0,
           ),
         ),
@@ -104,11 +104,12 @@ class AppTheme {
       );
 
   static TextTheme _textTheme(Color color) => TextTheme(
-        headlineMedium: TextStyle(
-            color: color, fontWeight: FontWeight.bold, fontSize: 24),
-        titleLarge: TextStyle(
-            color: color, fontWeight: FontWeight.w600, fontSize: 18),
+        headlineMedium:
+            TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 24),
+        titleLarge:
+            TextStyle(color: color, fontWeight: FontWeight.w600, fontSize: 18),
         bodyLarge: TextStyle(color: color, fontSize: 16),
-        bodyMedium: TextStyle(color: color.withOpacity(0.7), fontSize: 14),
+        bodyMedium:
+            TextStyle(color: color.withValues(alpha: 0.7), fontSize: 14),
       );
 }

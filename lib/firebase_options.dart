@@ -42,8 +42,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '638501990674',
     projectId: 'connectcall-b60a7',
     storageBucket: 'connectcall-b60a7.firebasestorage.app',
-    androidClientId: '638501990674-ckh6521n0nfo7b79i0o8bvcn3mcddi1d.apps.googleusercontent.com',
-    iosClientId: '638501990674-n7g8vmd6mlm7n4igd8acg3iur0153a4i.apps.googleusercontent.com',
+    androidClientId:
+        '638501990674-ckh6521n0nfo7b79i0o8bvcn3mcddi1d.apps.googleusercontent.com',
+    iosClientId:
+        '638501990674-n7g8vmd6mlm7n4igd8acg3iur0153a4i.apps.googleusercontent.com',
     iosBundleId: 'com.example.connectcall',
   );
 }

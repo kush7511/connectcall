@@ -49,7 +49,8 @@ class CallHistoryScreen extends StatelessWidget {
                 }
                 if (snapshot.hasError) {
                   return Center(
-                    child: Text('Failed to load call history.\n${snapshot.error}',
+                    child: Text(
+                        'Failed to load call history.\n${snapshot.error}',
                         textAlign: TextAlign.center),
                   );
                 }
@@ -64,7 +65,8 @@ class CallHistoryScreen extends StatelessWidget {
                   itemBuilder: (context, i) {
                     final call = calls[i];
                     final outgoing = call.isOutgoing(uid);
-                    final peerName = outgoing ? call.calleeName : call.callerName;
+                    final peerName =
+                        outgoing ? call.calleeName : call.callerName;
                     final peerPhoto =
                         outgoing ? call.calleePhotoUrl : call.callerPhotoUrl;
                     final missed = call.isMissed && !outgoing;
@@ -72,7 +74,8 @@ class CallHistoryScreen extends StatelessWidget {
 
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: AppColors.primary.withOpacity(0.15),
+                        backgroundColor:
+                            AppColors.primary.withValues(alpha: 0.15),
                         backgroundImage:
                             peerPhoto != null ? NetworkImage(peerPhoto) : null,
                         child: peerPhoto == null

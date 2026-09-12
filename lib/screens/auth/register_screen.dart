@@ -15,6 +15,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
+  final _phoneCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmCtrl = TextEditingController();
   bool _loading = false;
@@ -23,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void dispose() {
     _nameCtrl.dispose();
     _emailCtrl.dispose();
+    _phoneCtrl.dispose();
     _passwordCtrl.dispose();
     _confirmCtrl.dispose();
     super.dispose();
@@ -33,7 +35,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() => _loading = true);
     final auth = context.read<AuthProvider>();
     final ok = await auth.register(
-        _nameCtrl.text.trim(), _emailCtrl.text.trim(), _passwordCtrl.text);
+      _nameCtrl.text.trim(),
+      _emailCtrl.text.trim(),
+      _passwordCtrl.text,
+      phoneNumber:
+          _phoneCtrl.text.trim().isEmpty ? null : _phoneCtrl.text.trim(),
+    );
     if (!mounted) return;
     setState(() => _loading = false);
 
@@ -63,25 +70,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   controller: _nameCtrl,
                   decoration: const InputDecoration(
-                      labelText: 'Name', prefixIcon: Icon(Icons.person_outline)),
-                  validator: (v) =>
-                      (v == null || v.trim().isEmpty) ? 'Enter your name' : null,
+                      labelText: 'Name',
+                      prefixIcon: Icon(Icons.person_outline)),
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Enter your name'
+                      : null,
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
-                      labelText: 'Email', prefixIcon: Icon(Icons.email_outlined)),
-                  validator: (v) =>
-                      (v == null || !v.contains('@')) ? 'Enter a valid email' : null,
+                      labelText: 'Email',
+                      prefixIcon: Icon(Icons.email_outlined)),
+                  validator: (v) => (v == null || !v.contains('@'))
+                      ? 'Enter a valid email'
+                      : null,
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _phoneCtrl,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                    labelText: 'Phone number',
+                    prefixIcon: Icon(Icons.call_outlined),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _passwordCtrl,
                   obscureText: true,
                   decoration: const InputDecoration(
-                      labelText: 'Password', prefixIcon: Icon(Icons.lock_outline)),
+                      labelText: 'Password',
+                      prefixIcon: Icon(Icons.lock_outline)),
                   validator: (v) => (v == null || v.length < 6)
                       ? 'At least 6 characters'
                       : null,

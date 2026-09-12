@@ -26,7 +26,11 @@ class UserService {
   List<UserModel> filter(List<UserModel> users, String query) {
     if (query.trim().isEmpty) return users;
     final q = query.toLowerCase();
-    return users.where((u) => u.name.toLowerCase().contains(q)).toList();
+    return users.where((u) {
+      return u.name.toLowerCase().contains(q) ||
+          u.email.toLowerCase().contains(q) ||
+          (u.phoneNumber?.toLowerCase().contains(q) ?? false);
+    }).toList();
   }
 
   Future<UserModel?> getUser(String uid) async {
@@ -38,11 +42,18 @@ class UserService {
   Future<void> updateProfile({
     required String uid,
     String? name,
+    String? phoneNumber,
+    String? statusMessage,
     String? photoUrl,
   }) {
     final data = <String, dynamic>{};
     if (name != null) data['name'] = name;
+    if (phoneNumber != null) data['phoneNumber'] = phoneNumber;
+    if (statusMessage != null) data['statusMessage'] = statusMessage;
     if (photoUrl != null) data['photoUrl'] = photoUrl;
-    return _db.collection(FirestoreCollections.users).doc(uid).update(data);
+    return _db
+        .collection(FirestoreCollections.users)
+        .doc(uid)
+        .set(data, SetOptions(merge: true));
   }
 }

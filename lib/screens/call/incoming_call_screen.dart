@@ -41,6 +41,7 @@ class _IncomingCallScreenState extends State<IncomingCallScreen> {
             content: Text('Permission denied - cannot accept the call.')),
       );
       await _callingService.rejectCall(widget.call.callId);
+      if (!mounted) return;
       Navigator.of(context).pop();
       return;
     }
@@ -104,7 +105,8 @@ class _IncomingCallScreenState extends State<IncomingCallScreen> {
                           widget.call.callerName.isNotEmpty
                               ? widget.call.callerName[0].toUpperCase()
                               : '?',
-                          style: const TextStyle(fontSize: 40, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 40, color: Colors.white),
                         )
                       : null,
                 ),
@@ -112,7 +114,9 @@ class _IncomingCallScreenState extends State<IncomingCallScreen> {
                 Text(
                   widget.call.callerName,
                   style: const TextStyle(
-                      color: Colors.white, fontSize: 26, fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 6),
                 Text(

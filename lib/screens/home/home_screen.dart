@@ -7,6 +7,7 @@ import '../contacts/contacts_screen.dart';
 import '../history/call_history_screen.dart';
 import '../profile/profile_screen.dart';
 import '../call/incoming_call_screen.dart';
+import 'home_dashboard_screen.dart';
 
 /// Root authenticated screen: bottom nav across Home/Contacts/
 /// Calls/Profile, plus a single global listener for incoming calls
@@ -34,28 +35,36 @@ class _HomeScreenState extends State<HomeScreen> {
         if (call != null && call.callId != _handledCallId) {
           _handledCallId = call.callId;
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.of(context, rootNavigator: true).push(
-              MaterialPageRoute(
-                builder: (_) => IncomingCallScreen(call: call),
-                fullscreenDialog: true,
-              ),
-            ).then((_) => _handledCallId = null);
+            Navigator.of(context, rootNavigator: true)
+                .push(
+                  MaterialPageRoute(
+                    builder: (_) => IncomingCallScreen(call: call),
+                    fullscreenDialog: true,
+                  ),
+                )
+                .then((_) => _handledCallId = null);
           });
         }
 
         return Scaffold(
           body: IndexedStack(
             index: _index,
-            children: const [
-              ContactsScreen(),
-              CallHistoryScreen(),
-              ProfileScreen(),
+            children: [
+              HomeDashboardScreen(
+                  onOpenContacts: () => setState(() => _index = 1)),
+              const ContactsScreen(),
+              const CallHistoryScreen(),
+              const ProfileScreen(),
             ],
           ),
           bottomNavigationBar: NavigationBar(
             selectedIndex: _index,
             onDestinationSelected: (i) => setState(() => _index = i),
             destinations: const [
+              NavigationDestination(
+                  icon: Icon(Icons.dialpad_outlined),
+                  selectedIcon: Icon(Icons.dialpad),
+                  label: 'Home'),
               NavigationDestination(
                   icon: Icon(Icons.contacts_outlined),
                   selectedIcon: Icon(Icons.contacts),
@@ -80,10 +89,5 @@ class _HomeScreenState extends State<HomeScreen> {
 /// (Home / Contacts / Calls / Profile) - Contacts doubles as the
 /// Home tab here since it already carries search + recents.
 class HomeNavLabels {
-  static const items = [
-    AppConstants.appName,
-    'Contacts',
-    'Calls',
-    'Profile'
-  ];
+  static const items = [AppConstants.appName, 'Contacts', 'Calls', 'Profile'];
 }

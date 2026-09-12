@@ -22,7 +22,8 @@ class CallHistoryService {
 
       final all = [...callerSnap.docs, ...calleeSnap.docs]
           .map((d) => CallModel.fromMap(d.data(), d.id))
-          .where((c) => c.status != CallStatus.calling && c.status != CallStatus.ringing)
+          .where((c) =>
+              c.status != CallStatus.calling && c.status != CallStatus.ringing)
           .toList();
 
       // De-dupe (a doc could theoretically show up in both queries

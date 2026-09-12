@@ -44,7 +44,8 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
   void _onCallChanged() {
     if (!mounted) return;
     if (_call.status == CallStatus.connected && _timer == null) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (_) => _call.tickDuration());
+      _timer = Timer.periodic(
+          const Duration(seconds: 1), (_) => _call.tickDuration());
     }
     if ([
           CallStatus.ended,
@@ -123,8 +124,8 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
                           widget.peerName.isNotEmpty
                               ? widget.peerName[0].toUpperCase()
                               : '?',
-                          style:
-                              const TextStyle(fontSize: 44, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 44, color: Colors.white),
                         )
                       : null,
                 ),
@@ -132,11 +133,14 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
                 Text(
                   widget.peerName,
                   style: const TextStyle(
-                      color: Colors.white, fontSize: 26, fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 8),
                 Text(_statusLabel,
-                    style: const TextStyle(color: Colors.white70, fontSize: 16)),
+                    style:
+                        const TextStyle(color: Colors.white70, fontSize: 16)),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -149,9 +153,7 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
                       onTap: () => _call.toggleMute(),
                     ),
                     CallButton(
-                      icon: _call.isSpeakerOn
-                          ? Icons.volume_up
-                          : Icons.hearing,
+                      icon: _call.isSpeakerOn ? Icons.volume_up : Icons.hearing,
                       label: 'Speaker',
                       active: _call.isSpeakerOn,
                       activeColor: Colors.white,
@@ -174,4 +176,3 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
     );
   }
 }
-

@@ -27,7 +27,7 @@ class UserTile extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 24,
-            backgroundColor: AppColors.primary.withOpacity(0.15),
+            backgroundColor: AppColors.primary.withValues(alpha: 0.15),
             backgroundImage:
                 user.photoUrl != null ? NetworkImage(user.photoUrl!) : null,
             child: user.photoUrl == null
@@ -53,8 +53,8 @@ class UserTile extends StatelessWidget {
           ),
         ],
       ),
-      title: Text(user.name,
-          style: const TextStyle(fontWeight: FontWeight.w600)),
+      title:
+          Text(user.name, style: const TextStyle(fontWeight: FontWeight.w600)),
       subtitle: Text(user.isOnline ? 'Online' : 'Offline'),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

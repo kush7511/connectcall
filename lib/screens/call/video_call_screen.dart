@@ -68,7 +68,8 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     _remoteRenderer.srcObject = _call.remoteStream;
 
     if (_call.status == CallStatus.connected && _timer == null) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (_) => _call.tickDuration());
+      _timer = Timer.periodic(
+          const Duration(seconds: 1), (_) => _call.tickDuration());
     }
     if ([
           CallStatus.ended,
@@ -184,7 +185,10 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                    colors: [
+                      Colors.black.withValues(alpha: 0.6),
+                      Colors.transparent
+                    ],
                   ),
                 ),
                 child: Column(
@@ -197,7 +201,8 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
                             fontWeight: FontWeight.w600)),
                     const SizedBox(height: 4),
                     Text(_statusLabel,
-                        style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                        style: const TextStyle(
+                            color: Colors.white70, fontSize: 14)),
                   ],
                 ),
               ),
@@ -231,7 +236,10 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
                   gradient: LinearGradient(
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
-                    colors: [Colors.black.withOpacity(0.7), Colors.transparent],
+                    colors: [
+                      Colors.black.withValues(alpha: 0.7),
+                      Colors.transparent
+                    ],
                   ),
                 ),
                 child: Row(
@@ -245,7 +253,9 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
                       onTap: () => _call.toggleMute(),
                     ),
                     CallButton(
-                      icon: _call.isCameraOn ? Icons.videocam : Icons.videocam_off,
+                      icon: _call.isCameraOn
+                          ? Icons.videocam
+                          : Icons.videocam_off,
                       label: 'Camera',
                       active: !_call.isCameraOn,
                       activeColor: Colors.white,

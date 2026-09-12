@@ -42,10 +42,20 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> register(String name, String email, String password) async {
+  Future<bool> register(
+    String name,
+    String email,
+    String password, {
+    String? phoneNumber,
+  }) async {
     _error = null;
     try {
-      await _authService.register(name: name, email: email, password: password);
+      await _authService.register(
+        name: name,
+        email: email,
+        password: password,
+        phoneNumber: phoneNumber,
+      );
       return true;
     } catch (e) {
       _error = _authService.friendlyError(e);

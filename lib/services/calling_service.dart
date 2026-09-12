@@ -91,8 +91,7 @@ class CallingService {
     pc.onConnectionState = (state) {
       if (state == RTCPeerConnectionState.RTCPeerConnectionStateConnected) {
         onCallStatusChanged?.call(CallStatus.connected);
-      } else if (state ==
-              RTCPeerConnectionState.RTCPeerConnectionStateFailed ||
+      } else if (state == RTCPeerConnectionState.RTCPeerConnectionStateFailed ||
           state == RTCPeerConnectionState.RTCPeerConnectionStateDisconnected) {
         onCallStatusChanged?.call(CallStatus.failed);
       }

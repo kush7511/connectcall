@@ -70,8 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Email / Phone',
                     prefixIcon: Icon(Icons.email_outlined),
                   ),
-                  validator: (v) =>
-                      (v == null || v.trim().isEmpty) ? 'Enter your email' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Enter your email'
+                      : null,
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
