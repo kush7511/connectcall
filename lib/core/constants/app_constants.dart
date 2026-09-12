@@ -4,7 +4,7 @@ class FirestoreCollections {
   static const users = 'users';
   static const calls = 'calls';
   static const callHistory = 'call_history';
-  static const directContacts = 'direct_contacts';
+  static const directContacts = 'directContacts';
 }
 
 /// Enum-like string constants for call type / status, mirrored
